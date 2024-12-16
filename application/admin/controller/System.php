@@ -299,7 +299,12 @@ class System extends Base
         }
 
         $this->assign('config', config('maccms'));
-
+        if (file_exists(ROOT_PATH . 'extend/aws/src/Aws/aws.phar')) {
+            $aws_phar = 'Yes';
+        }else{
+            $aws_phar = 'No';
+        }
+        $this->assign('aws_phar',$aws_phar);
         $extends = mac_extends_list('upload');
         $this->assign('extends',$extends);
 
