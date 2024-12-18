@@ -4,7 +4,8 @@
     <a href="https://aws.amazon.com/cn/s3" target="_blank" class="layui-btn layui-btn-primary">点击申请 https://aws.amazon.com/cn/s3</a>
 </div>
 <div class="layui-form-mid layui-word-aux">{:lang('admin/system/configupload/s3_info')} <a href="https://github.com/aws/aws-sdk-php/releases/tag/3.334.6" target="_blank"
-                                                                      class="layui-btn layui-btn-primary">{:lang('down')}</a>{:lang('admin/system/configupload/s3_save_path')}:extend/aws/src/Aws/aws.phar {:lang('admin/system/configupload/s3_file_status')}:{$aws_phar}</div>
+                                                                      class="layui-btn layui-btn-primary">{:lang('down')}</a>{:lang('admin/system/configupload/s3_save_path')}:extend/aws/src/Aws/aws.phar
+    <b class="red">{:lang('admin/system/configupload/s3_file_status')}:{$aws_phar}</b></div>
 </div>
 <div class="layui-form-item upload_mode mode_S3" {if condition="$config['upload']['mode'] neq 'S3'"}style="display:none;" {/if}>
 <label class="layui-form-label">Bucket：</label>
