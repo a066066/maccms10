@@ -1345,7 +1345,6 @@ https://www.baidu.com/123.jpg',
     'admin/system/configupload/keep_local_tip'=>'Selecione isso para manter uma cópia local após o carregamento para um local remoto',
     'admin/system/configupload/s3_info'=>'Beim Verwenden von S3-Speicher stellen Sie sicher, dass die aws.phar-Datei heruntergeladen ist',
     'admin/system/configupload/s3_save_path'=>'Nach dem Herunterladen bitte speichern als',
-    'admin/system/configupload/s3_file_status'=>'Aktueller Status der aws.phar-Datei',
 
     'admin/system/configsms/title'=>'Configuração de Envio de SMS',
     'admin/system/configsms/tip'=>'Dicas:<br>

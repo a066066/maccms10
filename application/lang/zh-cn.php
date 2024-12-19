@@ -1342,7 +1342,6 @@ https://www.baidu.com/123.jpg
     'admin/system/configupload/keep_local_tip'=>'如果选择上传到远程，上传完成后，本地也将保留一份',
     'admin/system/configupload/s3_info'=>'使用s3存储请确保已经下载好aws.phar文件',
     'admin/system/configupload/s3_save_path'=>'下载后请保存为',
-    'admin/system/configupload/s3_file_status'=>'当前aws.phar文件状态',
 
     'admin/system/configsms/title'=>'短信发送配置',
     'admin/system/configsms/tip'=>'提示信息：<br>

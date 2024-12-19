@@ -1341,7 +1341,6 @@ https://www.baidu.com/123.jpg
     'admin/system/configupload/keep_local_tip'=>'リモートへのアップロードを選択した場合、アップロードが完了した後もローカルにコピーが保持されます',
     'admin/system/configupload/s3_info'=>'S3ストレージを使用する場合、aws.pharファイルがダウンロードされていることを確認してください',
     'admin/system/configupload/s3_save_path'=>'ダウンロード後は',
-    'admin/system/configupload/s3_file_status'=>'現在の aws.phar ファイルの状態',
 
     'admin/system/configsms/title'=>'SMS送信構成',
     'admin/system/configsms/tip'=>'ヒント情報：<br>
