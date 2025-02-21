@@ -20,7 +20,6 @@ class Vod extends Validate
         'vod_class'  => 'max:10',
         // year,area,class
         'type_id_1'    => 'require|number|between:0,' . PHP_INT_MAX,
-        'vod_id'    => 'require|number|between:0,' . PHP_INT_MAX,
     ];
 
 //    protected $message  =   [
