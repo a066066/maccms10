@@ -814,6 +814,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/mainland_ip_limit' => 'Restricciones regionales',
   'admin/system/config/mainland_ip_only_allow' => 'Solo permitir',
   'admin/system/config/mainland_ip_not_allow' => 'No permitir',
+  'admin/system/config/mainland_ip_limit_tip'=>'Solo permitir: Solo permitir que las direcciones IP de la región continental accedan; no permitir: no permitir que las direcciones IP de la región continental accedan;',
   'admin/system/config/pathinfo_depr' => 'Separador de PATH',
   'admin/system/config/pathinfo_depr_tip' => 'Al cambiar este separador, se modificará la dirección URL en modo no estático',
   'admin/system/config/xg' => 'Barra diagonal /',
