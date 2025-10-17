@@ -48,10 +48,16 @@ class System extends Base
 
         $options = [
             'type' => $param['type'],
+            'host' => $param['host'],
             'port' => $param['port'],
             'username' => $param['username'],
             'password' => $param['password']
         ];
+
+        // 添加 Redis DB 支持
+        if ($param['type'] == 'redis' && isset($param['db'])) {
+            $options['select'] = intval($param['db']);
+        }
 
         $hd = Cache::connect($options);
         $hd->set('test', 'test');
