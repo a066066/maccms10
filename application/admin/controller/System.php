@@ -54,8 +54,7 @@ class System extends Base
             'password' => $param['password']
         ];
 
-        // 添加 Redis DB 支持
-        if ($param['type'] == 'redis' && isset($param['db'])) {
+        if ($param['type'] == 'redis' && isset($param['db']) && intval($param['db']) > 0) {
             $options['select'] = intval($param['db']);
         }
 

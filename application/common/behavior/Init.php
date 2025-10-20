@@ -103,8 +103,7 @@ class Init
         config('cache.port',$config['app']['cache_port']);
         config('cache.username',$config['app']['cache_username']);
         config('cache.password',$config['app']['cache_password']);
-        // 添加 Redis DB 支持
-        if($config['app']['cache_type'] == 'redis' && isset($config['app']['cache_db'])){
+        if($config['app']['cache_type'] == 'redis' && isset($config['app']['cache_db']) && intval($config['app']['cache_db']) > 0){
             config('cache.select', intval($config['app']['cache_db']));
         }
         if($config['app']['cache_type'] != 'file'){
