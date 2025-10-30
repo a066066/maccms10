@@ -829,7 +829,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/wall_blank' => '공백 방식',
   'admin/system/config/wall_filter_tip' => '활성화하면 일부 페이지에 전달된 매개변수가 페이지에 표시될 때 인코딩되거나 공백으로 바뀌어 가짜 방화벽 위협을 해결합니다.',
   'admin/system/config/popedom_filter' => '데이터 권한 필터링',
-  'admin/system/config/popedom_filter_tip' => '활성화하면 권한이 없는 카테고리와 데이터가 숨겨집니다.',
+  'admin/system/config/popedom_filter_tip' => '활성화하면 목록 및 검색 페이지에서 권한이 없는 카테고리의 동영상/기사 등의 데이터를 볼 수 없습니다(비활성화 시에는 볼 수 있지만 클릭하면 권한 부족 메시지가 표시됩니다)',
   'admin/system/config/cache_type' => '캐시 방식',
   'admin/system/config/cache_host' => '서버',
   'admin/system/config/cache_port' => '포트',

@@ -829,7 +829,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/wall_blank' => '空白方式',
   'admin/system/config/wall_filter_tip' => '有効にすると、一部のページに渡されたパラメータがページに表示されるときにエンコードまたは空白に置き換えられ、偽の壁の脅威が解決されます',
   'admin/system/config/popedom_filter' => 'データ権限フィルタリング',
-  'admin/system/config/popedom_filter_tip' => '有効にすると、権限のないカテゴリとデータが非表示になります',
+  'admin/system/config/popedom_filter_tip' => '有効にすると、リストや検索ページで権限のないカテゴリの動画/記事などのデータが表示されなくなります（無効の場合は表示されますがクリックすると権限不足と表示されます）',
   'admin/system/config/cache_type' => 'キャッシュ方式',
   'admin/system/config/cache_host' => 'サーバー',
   'admin/system/config/cache_port' => 'ポート',

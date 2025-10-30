@@ -829,7 +829,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/wall_blank' => '空白方式',
   'admin/system/config/wall_filter_tip' => '開啟後將部分頁面傳入參數在頁面展示時編碼或替換為空解決假墻威脅',
   'admin/system/config/popedom_filter' => '數據權限過濾',
-  'admin/system/config/popedom_filter_tip' => '開啟後將隱藏沒有權限的分類和數據',
+  'admin/system/config/popedom_filter_tip' => '開啟後，用戶在列表和搜索頁面將無法看到沒有權限的分類視頻/文章等數據（關閉時仍可看到但點擊後提示權限不足）',
   'admin/system/config/cache_type' => '緩存方式',
   'admin/system/config/cache_host' => '服務器',
   'admin/system/config/cache_port' => '端口',

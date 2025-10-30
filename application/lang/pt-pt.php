@@ -829,7 +829,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/wall_blank' => 'Método de espaço em branco',
   'admin/system/config/wall_filter_tip' => 'Após ativado, alguns parâmetros passados ​​para a página serão codificados ou substituídos por espaços em branco quando a página for exibida para resolver a ameaça de parede falsa',
   'admin/system/config/popedom_filter' => 'Filtragem de permissão de dados',
-  'admin/system/config/popedom_filter_tip' => 'Após ativado, as categorias e dados sem permissão serão ocultados',
+  'admin/system/config/popedom_filter_tip' => 'Quando ativado, os usuários não poderão ver vídeos/artigos de categorias sem permissão em listas e páginas de pesquisa (quando desativado, podem vê-los mas recebem uma mensagem de erro de permissão ao clicar)',
   'admin/system/config/cache_type' => 'Método de cache',
   'admin/system/config/cache_host' => 'Servidor',
   'admin/system/config/cache_port' => 'Porta',

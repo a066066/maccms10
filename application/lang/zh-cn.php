@@ -896,7 +896,7 @@ https://www.baidu.com/123.jpg
     'admin/system/config/wall_blank'=>'空白方式',
     'admin/system/config/wall_filter_tip'=>'开启后将部分页面传入参数在页面展示时编码或替换为空解决假墙威胁',
     'admin/system/config/popedom_filter'=>'数据权限过滤',
-    'admin/system/config/popedom_filter_tip'=>'开启后将隐藏没有权限的分类和数据',
+    'admin/system/config/popedom_filter_tip'=>'开启后，用户在列表和搜索页面将无法看到没有权限的分类视频/文章等数据（关闭时仍可看到但点击后提示权限不足）',
     'admin/system/config/cache_type'=>'缓存方式',
     'admin/system/config/cache_host'=>'服务器',
     'admin/system/config/cache_port'=>'端口',

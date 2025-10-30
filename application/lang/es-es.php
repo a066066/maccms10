@@ -829,7 +829,7 @@ https://www.baidu.com/123.jpg
   'admin/system/config/wall_blank' => 'Método de espacio en blanco',
   'admin/system/config/wall_filter_tip' => 'Al activar, algunos parámetros transmitidos a las páginas se codificarán o reemplazarán con espacios en blanco para evitar amenazas de falsos cortafuegos.',
   'admin/system/config/popedom_filter' => 'Filtrado de permisos de datos',
-  'admin/system/config/popedom_filter_tip' => 'Al activar, se ocultarán las categorías y datos sin permiso.',
+  'admin/system/config/popedom_filter_tip' => 'Cuando está activado, los usuarios no podrán ver videos/artículos de categorías sin permiso en listas y páginas de búsqueda (cuando está desactivado, pueden verlos pero reciben un mensaje de error de permiso al hacer clic)',
   'admin/system/config/cache_type' => 'Tipo de caché',
   'admin/system/config/cache_host' => 'Servidor',
   'admin/system/config/cache_port' => 'Puerto',
