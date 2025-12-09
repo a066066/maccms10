@@ -357,7 +357,16 @@ class Vod extends Base {
             }
         }
         if(!empty($typenot)){
-            $where['type_id'] = ['not in',$typenot];
+            $typenot_arr = array_map('intval', explode(',', $typenot));
+            // 如果同时存在 type 和 typenot，需在已有 type 条件上排除 typenot
+            if(!empty($type) && is_array($type)){
+                $type = array_diff($type, $typenot_arr);
+                if(!empty($type)){
+                    $where['type_id'] = ['in', implode(',', $type)];
+                }
+            } else {
+                $where['type_id'] = ['not in',$typenot];
+            }
         }
         if(!empty($tid)) {
             $where['type_id|type_id_1'] = ['eq',$tid];
