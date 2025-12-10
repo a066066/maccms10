@@ -423,6 +423,110 @@ class Collect extends Base {
     }
 
     /**
+     * 统计播放组集数
+     */
+    private function getPlayGroupEpisodeCount($v, $play_group_episode_count = [])
+    {
+        // 如果播放地址更新没有统计集数，则在这里统计
+        if (empty($play_group_episode_count) && !empty($v['vod_play_from'])) {
+            $tmp_play_from_arr = explode('$$$', $v['vod_play_from']);
+            $tmp_play_url_arr = explode('$$$', $v['vod_play_url']);
+            foreach ($tmp_play_from_arr as $tmp_k => $tmp_play_from) {
+                if (!empty($tmp_play_from) && isset($tmp_play_url_arr[$tmp_k])) {
+                    $tmp_episode_count = empty($tmp_play_url_arr[$tmp_k]) ? 0 : count(explode('#', $tmp_play_url_arr[$tmp_k]));
+                    $play_group_episode_count[$tmp_play_from] = $tmp_episode_count;
+                }
+            }
+        }
+
+        return $play_group_episode_count;
+    }
+
+    /**
+     * 找出集数最多的播放组
+     */
+    private function findMaxEpisodePlayGroup($play_group_episode_count)
+    {
+        if (empty($play_group_episode_count)) {
+            return '';
+        }
+        // 找出集数最多的播放组
+        $max_episode_count = 0;
+        $max_episode_play_from = '';
+        foreach ($play_group_episode_count as $play_from => $episode_count) {
+            if ($episode_count > $max_episode_count) {
+                $max_episode_count = $episode_count;
+                $max_episode_play_from = $play_from;
+            }
+        }
+
+        return $max_episode_play_from;
+    }
+
+    /**
+     * 根据播放组获取备注
+     */
+    private function getRemarksByPlayGroup($v, $update, $max_episode_play_from)
+    {
+        if (empty($max_episode_play_from)) {
+            return null;
+        }
+
+        // 使用更新后的 vod_play_note，如果已经在前面更新过
+        $current_play_note = isset($update['vod_play_note']) ? $update['vod_play_note'] : $v['vod_play_note'];
+        $play_from_arr = explode('$$$', $v['vod_play_from']);
+        $play_note_arr = explode('$$$', $current_play_note);
+        $max_play_key = array_search($max_episode_play_from, $play_from_arr);
+
+        if ($max_play_key !== false && isset($play_note_arr[$max_play_key]) && !empty($play_note_arr[$max_play_key])) {
+            return $play_note_arr[$max_play_key];
+        }
+
+        // 如果找不到对应的备注，但有API传递的备注，则使用API备注
+        if (!empty($v['vod_remarks'])) {
+            return $v['vod_remarks'];
+        }
+
+        return null;
+    }
+
+    /**
+     * 处理视频备注更新逻辑
+     * 根据集数最多的播放组来更新备注
+     */
+    private function handleVodRemarksUpdate($v, $info, $update, $play_group_episode_count)
+    {
+        // 优先使用 API 明确传递的备注（如果不为空且与当前不同）
+        $should_use_api_remarks = !empty($v['vod_remarks']) && $v['vod_remarks'] != $info['vod_remarks'];
+
+        // 如果 API 明确传递了不同的备注，直接使用
+        if ($should_use_api_remarks) {
+            return $v['vod_remarks'];
+        }
+
+        // 根据播放组来更新备注
+        $play_group_episode_count = $this->getPlayGroupEpisodeCount($v, $play_group_episode_count);
+
+        if (!empty($play_group_episode_count)) {
+            // 找出集数最多的播放组
+            $max_episode_play_from = $this->findMaxEpisodePlayGroup($play_group_episode_count);
+
+            // 获取对应播放组的备注
+            $remarks = $this->getRemarksByPlayGroup($v, $update, $max_episode_play_from);
+            if ($remarks !== null) {
+                return $remarks;
+            }
+        }
+
+        // 如果以上都没有找到合适的备注，但有API传递的备注且与当前不同，则使用API备注
+        if (!empty($v['vod_remarks']) && $v['vod_remarks'] != $info['vod_remarks']) {
+            return $v['vod_remarks'];
+        }
+
+        return null;
+    }
+
+    /**
      * 同步图片
      *
      * @param $pic_status int 是否同步。为1时，同步图片
@@ -968,57 +1072,9 @@ class Collect extends Base {
                             }
                         }
                         if (strpos(',' . $config['uprule'], 'd')!==false) {
-                            // 根据集数最多的播放组来更新备注
-                            // https://github.com/magicblack/maccms10/issues/1091
-                            
-                            // 优先使用 API 明确传递的备注（如果不为空且与当前不同）
-                            $should_use_api_remarks = !empty($v['vod_remarks']) && $v['vod_remarks'] != $info['vod_remarks'];
-                            
-                            // 如果 API 没有明确传递备注，或者传递的备注与当前相同，则根据播放组来更新
-                            if (!$should_use_api_remarks) {
-                                // 如果播放地址更新没有统计集数，则在这里统计
-                                if (empty($play_group_episode_count) && !empty($v['vod_play_from'])) {
-                                    $tmp_play_from_arr = explode('$$$', $v['vod_play_from']);
-                                    $tmp_play_url_arr = explode('$$$', $v['vod_play_url']);
-                                    foreach ($tmp_play_from_arr as $tmp_k => $tmp_play_from) {
-                                        if (!empty($tmp_play_from) && isset($tmp_play_url_arr[$tmp_k])) {
-                                            $tmp_episode_count = empty($tmp_play_url_arr[$tmp_k]) ? 0 : count(explode('#', $tmp_play_url_arr[$tmp_k]));
-                                            $play_group_episode_count[$tmp_play_from] = $tmp_episode_count;
-                                        }
-                                    }
-                                }
-                                
-                                if (!empty($play_group_episode_count)) {
-                                    // 找出集数最多的播放组
-                                    $max_episode_count = 0;
-                                    $max_episode_play_from = '';
-                                    foreach ($play_group_episode_count as $play_from => $episode_count) {
-                                        if ($episode_count > $max_episode_count) {
-                                            $max_episode_count = $episode_count;
-                                            $max_episode_play_from = $play_from;
-                                        }
-                                    }
-                                    // 只使用集数最多的播放组对应的备注
-                                    if (!empty($max_episode_play_from)) {
-                                        // 使用更新后的 vod_play_note，如果已经在前面更新过
-                                        $current_play_note = isset($update['vod_play_note']) ? $update['vod_play_note'] : $v['vod_play_note'];
-                                        $play_from_arr = explode('$$$', $v['vod_play_from']);
-                                        $play_note_arr = explode('$$$', $current_play_note);
-                                        $max_play_key = array_search($max_episode_play_from, $play_from_arr);
-                                        if ($max_play_key !== false && isset($play_note_arr[$max_play_key]) && !empty($play_note_arr[$max_play_key])) {
-                                            $update['vod_remarks'] = $play_note_arr[$max_play_key];
-                                        } else if (!empty($v['vod_remarks'])) {
-                                            $update['vod_remarks'] = $v['vod_remarks'];
-                                        }
-                                    } else if (!empty($v['vod_remarks'])) {
-                                        $update['vod_remarks'] = $v['vod_remarks'];
-                                    }
-                                } else if (!empty($v['vod_remarks']) && $v['vod_remarks'] != $info['vod_remarks']) {
-                                    $update['vod_remarks'] = $v['vod_remarks'];
-                                }
-                            } else {
-                                // API 明确传递了不同的备注，直接使用
-                                $update['vod_remarks'] = $v['vod_remarks'];
+                            $new_remarks = $this->handleVodRemarksUpdate($v, $info, $update, $play_group_episode_count);
+                            if ($new_remarks !== null) {
+                                $update['vod_remarks'] = $new_remarks;
                             }
                         }
                         if (strpos(',' . $config['uprule'], 'e')!==false && !empty($v['vod_director']) && $v['vod_director']!=$info['vod_director']) {
